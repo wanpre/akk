@@ -1,22 +1,3 @@
-node -v
-npm install -g http-server
-http-server -p 8080
+mshta.exe vbscript:msgbox("mshta正常运行",64):close
 
-http://localhost:8080/obfuscated_loader.js
-https://nodejs.org/zh-cn/download/
-
-reg query "HKLM\SOFTWARE\Microsoft\Windows Script Host\Settings" /v Enabled
-
-reg add "HKLM\SOFTWARE\Microsoft\Windows Script Host\Settings"
-reg add "HKLM\SOFTWARE\Microsoft\Windows Script Host\Settings" /v Enabled /t REG_DWORD /d 1 /f
-mshta.exe malicious.hta
-
-cd C:\Users\admin\Desktop\akk-main
-
-Set shell = CreateObject("WScript.Shell")
-' 用mshta.exe执行弹窗命令（不依赖HTA文件，直接触发提示）
-shell.Run "mshta.exe vbscript:msgbox(""mshta.exe正常工作"",64):close"
-
-Set shell = CreateObject("WScript.Shell")
-shell.Run "mshta.exe vbscript:msgbox(""mshta正常工作"",64):close"
 
