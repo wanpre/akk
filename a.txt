@@ -1,4 +1,6 @@
 node -v
 npm install -g http-server
 http-server -p 8080
+
 http://localhost:8080/obfuscated_loader.js
+https://nodejs.org/zh-cn/download/
