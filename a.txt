@@ -10,3 +10,5 @@ reg query "HKLM\SOFTWARE\Microsoft\Windows Script Host\Settings" /v Enabled
 reg add "HKLM\SOFTWARE\Microsoft\Windows Script Host\Settings"
 reg add "HKLM\SOFTWARE\Microsoft\Windows Script Host\Settings" /v Enabled /t REG_DWORD /d 1 /f
 mshta.exe malicious.hta
+
+cd C:\Users\admin\Desktop\akk-main
