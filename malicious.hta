@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>JS#SMUGGLER POC - HTA 执行日志</title>
+<!-- 核心修改：取消隐藏，显式窗口 -->
+<HTA:APPLICATION ID="pocHta" SHOWINTASKBAR="yes" WINDOWSTATE="normal" BORDER="thin" CAPTION="yes" WIDTH="400" HEIGHT="200">
+<script language="VBScript">
+  ' HTA 窗口内显示日志
+  Sub ShowLog(msg)
+    document.getElementById("logArea").innerText = document.getElementById("logArea").innerText & vbCrLf & msg
+  End Sub
+
+  ' 阶段3核心：显式调用 PowerShell 弹出「计算机」
+  Sub RunPowerShell()
+    Dim psCmd, shell
+    ' PowerShell 命令：弹出「计算机」窗口（系统内置CLSID），并显示日志
+    psCmd = "powershell.exe -Command ""Write-Host '[POC 测试] 正在弹出「计算机」窗口...'; explorer.exe ::{20D04FE0-3AEA-1069-A2D8-08002B30309D}; Read-Host '按 Enter 键关闭 PowerShell 窗口'"""
+    
+    ' 显示 HTA 日志
+    Call ShowLog("HTA 启动成功，正在调用 PowerShell...")
+    
+    ' 执行命令：1=显式 PowerShell 窗口；False=不等待，保持窗口打开
+    Set shell = CreateObject("WScript.Shell")
+    shell.Run psCmd, 1, False 
+    Set shell = Nothing
+    
+    ' 执行完成日志
+    Call ShowLog("PowerShell 执行完成，HTA 即将关闭（10秒后）")
+    ' 10秒后自动关闭 HTA 窗口
+    window.setTimeout "window.close()", 10000
+  End Sub
+</script>
+<style>
+  body { font-family: Arial; padding: 20px; }
+  #logArea { font-size: 14px; color: #333; line-height: 1.5; }
+</style>
+</head>
+<body onload="RunPowerShell()">
+  <h3>JS#SMUGGLER POC - HTA 执行日志</h3>
+  <div id="logArea"></div>
+</body>
+</html>
