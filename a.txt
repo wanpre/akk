@@ -4,3 +4,5 @@ http-server -p 8080
 
 http://localhost:8080/obfuscated_loader.js
 https://nodejs.org/zh-cn/download/
+
+reg query "HKLM\SOFTWARE\Microsoft\Windows Script Host\Settings" /v Enabled
