@@ -16,3 +16,7 @@ cd C:\Users\admin\Desktop\akk-main
 Set shell = CreateObject("WScript.Shell")
 ' 用mshta.exe执行弹窗命令（不依赖HTA文件，直接触发提示）
 shell.Run "mshta.exe vbscript:msgbox(""mshta.exe正常工作"",64):close"
+
+Set shell = CreateObject("WScript.Shell")
+shell.Run "mshta.exe vbscript:msgbox(""mshta正常工作"",64):close"
+
